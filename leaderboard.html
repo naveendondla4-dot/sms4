@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Management System</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="images/app-icon.png"><meta name="theme-color" content="#6366f1"></head>
+<body>
+<div class="dashboard">
+
+<div class="sidebar" id="sidebar">
+  <div class="top">
+    <h2><i class="ri-rocket-2-line"></i></h2>
+    <button onclick="toggleSidebar()" id="menuBtn" style="background:none;border:none;color:white;font-size:22px;cursor:pointer;">
+      <i class="ri-menu-line"></i>
+    </button>
+  </div>
+  <ul><li class="" onclick="navigate('dashboard.html')"><i class="ri-home-5-line"></i><p>Dashboard</p></li><li class="" onclick="navigate('add_student.html')"><i class="ri-add-line"></i><p>Add</p></li><li class="" onclick="navigate('edit_students.html')"><i class="ri-edit-line"></i><p>Edit</p></li><li class="" onclick="navigate('analytics.html')"><i class="ri-bar-chart-line"></i><p>Analytics</p></li><li class="active" onclick="navigate('leaderboard.html')"><i class="ri-trophy-line"></i><p>Leaderboard</p></li><li class="" onclick="navigate('dashboard.html#profile')"><i class="ri-user-line"></i><p>Profile</p></li></ul>
+  <div class="logout">
+    <a href="#" onclick="openLogout(event)"><i class="ri-logout-box-r-line"></i><span>Logout</span></a>
+  </div>
+</div>
+<div class="main">
+
+<h1 class="title">🏆 Leaderboard</h1>
+<div class="card"><div style="overflow-x:auto;">
+<table id="leaderTable" style="width:100%;border-collapse:collapse;">
+<thead><tr><th>Rank</th><th>Name</th><th>Score</th><th>Attendance</th></tr></thead>
+<tbody id="leaderBody"></tbody>
+</table></div></div>
+
+</div>
+</div>
+<div class="modal" id="logoutModal">
+  <div class="card" style="max-width:380px;margin:15vh auto;padding:28px;">
+    <h2>Logout?</h2><p style="margin:12px 0 20px;">Are you sure you want to logout?</p>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button class="cancel-btn" onclick="closeLogout()">Cancel</button>
+      <button class="submit-btn" onclick="confirmLogout()">Logout</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+
+<script>if("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));</script></body></html>

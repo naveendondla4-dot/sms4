@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account - Student Management System</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="images/app-icon.png"><meta name="theme-color" content="#6366f1"></head>
+<body class="login-body">
+<div class="login-container">
+  <div class="login-left">
+    <h1>Create Account ✨</h1>
+    <p>Create your Student Management account.</p>
+    <p><strong>Simple frontend registration</strong></p>
+  </div>
+  <div class="login-card">
+    <h2>Register</h2>
+    <form id="registerForm">
+      <input id="regName" type="text" placeholder="Full Name" required>
+      <input id="regUsername" type="text" placeholder="Username" required>
+      <input id="regEmail" type="email" placeholder="Email" required>
+      <input id="regPassword" type="password" placeholder="Password" required>
+      <input id="regConfirm" type="password" placeholder="Confirm Password" required>
+      <button type="submit">Create Account</button>
+    </form>
+    <div style="text-align:center;margin-top:14px;">
+      <a href="index.html" style="font-size:14px;text-decoration:none;">← Back to Login</a>
+    </div>
+  </div>
+</div>
+<button class="login-theme-toggle" id="loginThemeToggle" aria-label="Toggle theme"><i class="ri-moon-line"></i></button>
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+<script>
+(function(){
+ const b=document.getElementById("loginThemeToggle");
+ if(localStorage.getItem("studentTheme")==="dark")document.body.classList.add("theme-dark");
+ function icon(){if(b)b.innerHTML=document.body.classList.contains("theme-dark")?'<i class="ri-sun-line"></i>':'<i class="ri-moon-line"></i>';}
+ icon(); if(b)b.onclick=function(){document.body.classList.toggle("theme-dark");localStorage.setItem("studentTheme",document.body.classList.contains("theme-dark")?"dark":"light");icon();};
+})();
+</script>
+
+<script>if("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));</script></body>
+</html>

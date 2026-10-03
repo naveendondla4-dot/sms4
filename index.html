@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Management System</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="images/app-icon.png"><meta name="theme-color" content="#6366f1"></head>
+<body class="login-body">
+<div class="login-container">
+  <div class="login-left">
+    <h1>Welcome Back 👋</h1>
+    <p>Manage students with AI insights 🚀</p>
+    <p><strong>Smart Student Management</strong></p>
+  </div>
+  <div class="login-card">
+    <h2>Sign In</h2>
+    <form id="loginForm">
+      <input id="username" type="text" placeholder="Username" required>
+      <input id="password" type="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap;">
+      <small style="opacity:.85;">Demo: admin / admin</small>
+      <a href="register.html" style="font-size:14px;font-weight:600;text-decoration:none;">Create account</a>
+    </div>
+  </div>
+</div>
+<button class="login-theme-toggle" id="loginThemeToggle" aria-label="Toggle theme"><i class="ri-moon-line"></i></button>
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+<script>
+(function(){
+ const b=document.getElementById("loginThemeToggle");
+ if(localStorage.getItem("studentTheme")==="dark")document.body.classList.add("theme-dark");
+ function icon(){if(b)b.innerHTML=document.body.classList.contains("theme-dark")?'<i class="ri-sun-line"></i>':'<i class="ri-moon-line"></i>';}
+ icon(); if(b)b.onclick=function(){document.body.classList.toggle("theme-dark");localStorage.setItem("studentTheme",document.body.classList.contains("theme-dark")?"dark":"light");icon();};
+})();
+</script>
+
+<script>if("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));</script><button id="installAppBtn" type="button" style="display:none;margin:12px auto;padding:12px 20px;border:0;border-radius:12px;background:linear-gradient(135deg,#06b6d4,#6366f1);color:#fff;font-weight:700;cursor:pointer;">📲 Install App</button><script>let deferredInstallPrompt=null;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstallPrompt=e;const b=document.getElementById("installAppBtn");if(b)b.style.display="block"});document.addEventListener("click",async e=>{if(e.target.id==="installAppBtn"&&deferredInstallPrompt){deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;e.target.style.display="none"}});</script></body></html>

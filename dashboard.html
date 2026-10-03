@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Management System</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="images/app-icon.png"><meta name="theme-color" content="#6366f1"></head>
+<body>
+<div class="dashboard">
+
+<div class="sidebar" id="sidebar">
+  <div class="top">
+    <h2><i class="ri-rocket-2-line"></i></h2>
+    <button onclick="toggleSidebar()" id="menuBtn" style="background:none;border:none;color:white;font-size:22px;cursor:pointer;">
+      <i class="ri-menu-line"></i>
+    </button>
+  </div>
+  <ul><li class="active" onclick="navigate('dashboard.html')"><i class="ri-home-5-line"></i><p>Dashboard</p></li><li class="" onclick="navigate('add_student.html')"><i class="ri-add-line"></i><p>Add</p></li><li class="" onclick="navigate('edit_students.html')"><i class="ri-edit-line"></i><p>Edit</p></li><li class="" onclick="navigate('analytics.html')"><i class="ri-bar-chart-line"></i><p>Analytics</p></li><li class="" onclick="navigate('leaderboard.html')"><i class="ri-trophy-line"></i><p>Leaderboard</p></li><li class="" onclick="navigate('dashboard.html#profile')"><i class="ri-user-line"></i><p>Profile</p></li></ul>
+  <div class="logout">
+    <a href="#" onclick="openLogout(event)"><i class="ri-logout-box-r-line"></i><span>Logout</span></a>
+  </div>
+</div>
+<div class="main">
+
+<h1 class="title" id="welcomeTitle">Welcome back, Admin 👋</h1>
+<div class="cards">
+  <div class="card"><h3>Total Students</h3><p id="totalStudents">0</p></div>
+  <div class="card"><h3>Average Score</h3><p id="avgScore">0</p></div>
+  <div class="card"><h3>Top Score</h3><p id="topScore">0</p></div>
+</div>
+
+<div class="performance">
+  <h2>Performance Overview</h2>
+  <div id="performanceList"></div>
+  <div style="margin-top:10px;"><a href="leaderboard.html" style="color:#6366f1;font-weight:600;text-decoration:none;">View All →</a></div>
+</div>
+
+<div class="students">
+  <h2>Students</h2>
+  <div class="student-grid" id="studentGrid"></div>
+  <div id="noStudents" class="empty-state" style="display:none;">No students yet. Add your first student.</div>
+</div>
+
+<div id="profilePage" class="profile-page" style="display:none;">
+  <h1 class="title">Account</h1>
+  <div class="profile-container">
+    <div class="profile-header">
+      <img src="images/male1.jpeg" class="profile-img" id="profileImg">
+      <div><h3>Profile Picture</h3><input type="file" id="profileUpload" accept="image/*"><p class="hint">PNG, JPG</p></div>
+    </div>
+    <div class="profile-form">
+      <div class="row"><div class="input-box"><label>First Name</label><input id="profileFirst" value="Admin"></div>
+      <div class="input-box"><label>Last Name</label><input id="profileLast" value="User"></div></div>
+      <div class="row"><div class="input-box"><label>Email</label><input id="profileEmail" value="admin@gmail.com"></div>
+      <div class="input-box"><label>Phone</label><input id="profilePhone" placeholder="+91 XXXXX XXXXX"></div></div>
+      <div class="row"><div class="input-box"><label>Date of Birth</label><input id="profileDob" type="date"></div>
+      <div class="input-box"><label>Gender</label><select id="profileGender"><option>Male</option><option>Female</option><option>Other</option></select></div></div>
+      <div class="row"><div class="input-box full"><label>Address</label><input id="profileAddress" placeholder="Enter your address"></div></div>
+      <button class="submit-btn" onclick="saveProfile()">Save Profile</button>
+    </div>
+    <div class="password-box"><div><h3>Password</h3><p>Update your password</p></div>
+      <button class="change-btn" onclick="changePassword()">Change Password</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="studentModal">
+  <div class="card" style="max-width:520px;margin:8vh auto;padding:25px;position:relative;">
+    <button onclick="closeStudentModal()" style="position:absolute;right:15px;top:10px;border:0;background:none;font-size:25px;">×</button>
+    <div style="display:flex;align-items:center;gap:15px;">
+      <div class="avatar" id="modalAvatar" style="width:70px;height:70px;"></div>
+      <div><h2 id="modalName"></h2><p id="modalScore"></p></div>
+    </div>
+    <div style="margin-top:20px;"><b>Attendance:</b> <span id="modalAttendance"></span></div>
+    <div style="margin-top:18px;">
+      <p>Math <span id="modalMathText"></span></p><div class="bar"><div class="progress" id="modalMathBar"></div></div>
+      <p>Science <span id="modalScienceText"></span></p><div class="bar"><div class="progress" id="modalScienceBar"></div></div>
+      <p>English <span id="modalEnglishText"></span></p><div class="bar"><div class="progress" id="modalEnglishBar"></div></div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+<div class="modal" id="logoutModal">
+  <div class="card" style="max-width:380px;margin:15vh auto;padding:28px;">
+    <h2>Logout?</h2><p style="margin:12px 0 20px;">Are you sure you want to logout?</p>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button class="cancel-btn" onclick="closeLogout()">Cancel</button>
+      <button class="submit-btn" onclick="confirmLogout()">Logout</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+
+<script>if("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));</script></body></html>

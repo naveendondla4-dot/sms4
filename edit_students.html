@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Management System</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="images/app-icon.png"><meta name="theme-color" content="#6366f1"></head>
+<body>
+<div class="dashboard">
+
+<div class="sidebar" id="sidebar">
+  <div class="top">
+    <h2><i class="ri-rocket-2-line"></i></h2>
+    <button onclick="toggleSidebar()" id="menuBtn" style="background:none;border:none;color:white;font-size:22px;cursor:pointer;">
+      <i class="ri-menu-line"></i>
+    </button>
+  </div>
+  <ul><li class="" onclick="navigate('dashboard.html')"><i class="ri-home-5-line"></i><p>Dashboard</p></li><li class="" onclick="navigate('add_student.html')"><i class="ri-add-line"></i><p>Add</p></li><li class="active" onclick="navigate('edit_students.html')"><i class="ri-edit-line"></i><p>Edit</p></li><li class="" onclick="navigate('analytics.html')"><i class="ri-bar-chart-line"></i><p>Analytics</p></li><li class="" onclick="navigate('leaderboard.html')"><i class="ri-trophy-line"></i><p>Leaderboard</p></li><li class="" onclick="navigate('dashboard.html#profile')"><i class="ri-user-line"></i><p>Profile</p></li></ul>
+  <div class="logout">
+    <a href="#" onclick="openLogout(event)"><i class="ri-logout-box-r-line"></i><span>Logout</span></a>
+  </div>
+</div>
+<div class="main">
+
+<h1 class="title">Manage Students ✏️</h1>
+<div style="margin-bottom:20px;display:flex;gap:10px;flex-wrap:wrap;">
+<input type="text" id="searchInput" placeholder="🔍 Search students..." style="flex:1;min-width:220px;padding:12px;border-radius:10px;border:1px solid #ddd;outline:none;">
+<select id="rowsSelect" style="padding:12px;border-radius:10px;"><option>5</option><option>10</option><option>15</option><option>20</option></select>
+<button class="submit-btn" onclick="sortStudents()">Score ↕</button>
+</div>
+<div class="card"><div style="overflow-x:auto;">
+<table id="studentsTable" style="width:100%;border-collapse:collapse;">
+<thead><tr style="text-align:left;color:gray;"><th>Name</th><th>Email</th><th>Score</th><th>Actions</th></tr></thead>
+<tbody id="studentsTableBody"></tbody>
+</table></div></div>
+<div class="pagination-bar"><span id="pageInfo" style="font-size:13px;color:#666;"></span><div id="pagination" style="display:flex;gap:5px;justify-content:center;flex-wrap:wrap;"></div></div>
+
+<div class="modal" id="editModal">
+<div class="card" style="max-width:700px;margin:5vh auto;padding:25px;max-height:90vh;overflow:auto;position:relative;">
+<button onclick="closeEditModal()" style="position:absolute;right:15px;top:10px;border:0;background:none;font-size:25px;">×</button>
+<h2>Edit Student</h2>
+<form id="editForm" style="margin-top:20px;">
+<input type="hidden" id="editId">
+<div class="grid">
+<div class="cut-input"><label>Full Name</label><input id="editName" required></div>
+<div class="cut-input"><label>Date of Birth</label><input id="editDob" type="date"></div>
+<div class="cut-input"><label>Gender</label><select id="editGender"><option>male</option><option>female</option><option>other</option></select></div>
+<div class="cut-input"><label>Email</label><input id="editEmail" type="email" required></div>
+<div class="cut-input"><label>Phone</label><input id="editPhone"></div>
+<div class="cut-input"><label>Degree / Course</label><input id="editDegree"></div>
+<div class="cut-input" style="grid-column:span 2;"><label>Address</label><input id="editAddress"></div>
+<div class="cut-input"><label>Math</label><input id="editMath" type="number" min="0" max="100"></div>
+<div class="cut-input"><label>Science</label><input id="editScience" type="number" min="0" max="100"></div>
+<div class="cut-input" style="grid-column:span 2;"><label>English</label><input id="editEnglish" type="number" min="0" max="100"></div>
+</div>
+<div class="form-actions"><button type="button" class="cancel-btn" onclick="closeEditModal()">Cancel</button><button class="submit-btn">Update</button></div>
+</form></div></div>
+
+</div>
+</div>
+<div class="modal" id="logoutModal">
+  <div class="card" style="max-width:380px;margin:15vh auto;padding:28px;">
+    <h2>Logout?</h2><p style="margin:12px 0 20px;">Are you sure you want to logout?</p>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button class="cancel-btn" onclick="closeLogout()">Cancel</button>
+      <button class="submit-btn" onclick="confirmLogout()">Logout</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+
+<script>if("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));</script></body></html>

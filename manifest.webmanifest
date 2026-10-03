@@ -1,0 +1,10 @@
+{
+  "name": "Naveen Student Management System",
+  "short_name": "Student Manager",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#6366f1",
+  "icons": [{"src":"images/app-icon.png","sizes":"any","type":"image/png","purpose":"any maskable"}]
+}
